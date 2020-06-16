@@ -106,7 +106,7 @@ resize2fs /dev/vg0/lv0
 
 ---
 
-Linux内核参数优化
+**Linux内核参数优化**
 
 ```
 内核参数优化
