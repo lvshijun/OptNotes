@@ -66,7 +66,7 @@
 
 ---
 
-lvm逻辑卷管理器
+**lvm逻辑卷管理器**
 
 ```bash
 block Device-- physical volumes-- volume group ---logical volumes
