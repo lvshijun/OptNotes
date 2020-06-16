@@ -66,5 +66,43 @@
 
 ---
 
+lvm逻辑卷管理器
+
+```
+block Device-- physical volumes-- volume group ---logical volumes
+
+指令详解:
+    pvs --显示物理卷
+    pvcreate --创建物理卷 (pvreate /dev/sda )
+    pvdisplay --详细显示物理卷的信息
+    vgcreate --创建卷组（vgcreate -s 16M[PE size] vg0[vgname] /dev/sda[磁盘] )
+    vgextend --增加新的物理卷至某一卷组（vgextend vg0 /dev/sda2)
+    vgs --显示卷组信息
+    vgdisplay --显示详细的卷组信息
+    vgrename --重命名vg名称
+    vgchange --vgchange -an vg0 禁用vg0 [-ay激活]
+    lvs --显示逻辑卷
+    lvcreate --创建逻辑卷 (lvreate -n lv0[卷组名] -l[PE个数] or -L[大小] vg0[指定来自那个卷组] )
+    lvextend --扩展逻辑卷大小（lvextend /dev/vg0/lv0 -l[PE个数] or -L[大小] /dev/vg00/lv0[指定目标]
+    --扩展大小时‘+‘表示增加多大，不带’+‘表示扩展至多大 ）
+    lvdisplay --详细显示逻辑卷的信息
+    resize2fs --同步文件系统 ( resize2fs /dev/vg0/lv0 xfs的文件系统使用 xfs_growfs /dev/vg0/lv0)
+
+空间扩展:
+    思路 :先把新增加的硬盘变成物理卷--把新的物理卷增加到卷组中--将空间分配至需要扩展的逻辑卷中--同步文件系统
+    #实际工作中一般我们是直接增加空间,这时直接从vgextend开始操作即可
+        pvcreate -- vgextend -- lvextend -- resize2fs
+
+
+注意 :新添加的硬盘如果不重启机器是看不到的,生产环境不允许重启.我们可以通过手动扫描发现设备
+    echo "- - -" > /sys/class/scsi_host/host0/scan
+    echo "- - -" > /sys/class/scsi_host/host1/scan
+    echo "- - -" > /sys/class/scsi_host/host2/scan
+
+lvm> lvextend -L +20G /dev/VolGroup00/LogVol02，给分区/var扩展20G的容量
+lvm> lvextend -l +100%FREE /dev/VolGroup00/LogVol02，扩展整块硬盘空间 (centos7 有问题)
+resize2fs /dev/vg0/lv0
+```
+
 
 
