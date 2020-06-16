@@ -1,3 +1,12 @@
-# My Awesome Book
+# **梳理日常工作中的知识点**
 
-This file file serves as your book's preface, a great place to describe your book's content and ideas.
+主要包含：
+
+1.Linux主流操作系统的常规配置及底层优化点。
+
+2.常见应用配置及参数解析。
+
+3.常见问题及常用解决方案。
+
+4.日常操作bash脚本。
+
