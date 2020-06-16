@@ -13,7 +13,7 @@
 
 ---
 
-**Firewalld**
+**Firewalld防火墙**
 
 ```bash
  使用firewalld打开关闭防火墙与端口
