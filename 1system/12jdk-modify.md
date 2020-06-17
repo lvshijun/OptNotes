@@ -79,10 +79,10 @@ export PATH JAVA_HOME CLASSPATH
 如果系统已经安装了其他版本的Java
 
 ```
-update-alternatives --install /usr/bin/java java /usr/java/jdk1.8.0_66/bin/java 300
-update-alternatives --install /usr/bin/javac javac /usr/java/jdk1.8.0_66/bin/javac 300
-update-alternatives --config java
-update-alternatives --config javac
+    update-alternatives --install /usr/bin/java java /usr/java/jdk1.8.0_66/bin/java 300
+    update-alternatives --install /usr/bin/javac javac /usr/java/jdk1.8.0_66/bin/javac 300
+    update-alternatives --config java
+    update-alternatives --config javac
 ```
 
 ### 5、检验是否安装成功

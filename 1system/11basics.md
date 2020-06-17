@@ -106,6 +106,34 @@ resize2fs /dev/vg0/lv0
 
 ---
 
+**nmcli常用指令**
+
+```
+设置dns命令
+nmcli con mod ens160 ipv4.dns "202.102.128.68 114.114.114.114"
+
+重新激活网卡
+nmcli con up ens160
+连接已成功激活（D-Bus 活动路径：/org/freedesktop/NetworkManager/ActiveConnection/5）
+
+将网卡配置设置为自启动autoconnect 为开机是否自启，yes为开机自启
+nmcli con mod ens160  autoconnect yes
+
+修改ip地址
+nmcli con mod “static” ipv4.addresses “172.25.X.10/24 172.25.X.254”
+这里的up和down相当于启用和禁用网卡配置
+nmcli connection down ens160
+nmcli connection up ens160
+nmcli con mod ens160  autoconnect yes
+
+如发现网卡启动后配置不生效可以尝试重启NetworkManager服务
+systemctl restart NetworkManager
+```
+
+
+
+---
+
 **配置PS1**
 
 ```
