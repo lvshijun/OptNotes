@@ -42,7 +42,7 @@
         systemctl start rpcbind.service
         systemctl start nfs.service
 
-启动之后可以通过status来查看状态，如果下次修改了配置，可以重启服务来使配置生效，也可以直接执行如下命令刷新配置：
+        启动之后可以通过status来查看状态，如果下次修改了配置，可以重启服务来使配置生效，也可以直接执行如下命令刷新配置：
 
         exportfs -a
         刷新配置即可生效，服务端配置完毕！
@@ -78,7 +78,7 @@
 
 ```bash
     如果需要设置开机挂载，在/etc/fstab添加一行配置即可：
-    
+
     192.168.1.3:/nfs_test /mnt/test1 nfs rw,tcp,intr 0 1
 ```
 
