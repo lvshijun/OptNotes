@@ -18,7 +18,7 @@
 
     安装完成之后配置nfs访问目录，配置文件位置/etc/exports，默认是空的这里添加一行：
         /nfs\_test 192.168.1.8\(rw,no\_root\_squash,no\_all\_squash,async\)
-        
+
         【注释】：这个配置表示开放本地存储目录/nfs\_test，只允许192.168.1.8这个主机有访问权限，
                 rw表示允许读写；no\_root\_squash表示root用户具有完全的管理权限；
                 no\_all\_squash表示保留共享文件的UID和GID，此项是默认不写也可以；
@@ -41,7 +41,7 @@
 ```
         systemctl start rpcbind.service
         systemctl start nfs.service
-        
+
 启动之后可以通过status来查看状态，如果下次修改了配置，可以重启服务来使配置生效，也可以直接执行如下命令刷新配置：
 
         exportfs -a
@@ -76,15 +76,19 @@
 
 ### 第四步：设置开机自动挂载
 
-```
+```bash
     如果需要设置开机挂载，在/etc/fstab添加一行配置即可：
+    
+    192.168.1.3:/nfs_test /mnt/test1 nfs rw,tcp,intr 0 1
 ```
 
-`192.168.1.3:/nfs_test /mnt/test1 nfs rw,tcp,intr 0 1`
+```
+    然后服务端和客户端都要用enable设置nfs和rpcbind服务开机启动，然后才可以正常挂载
 
-然后服务端和客户端都要用enable设置nfs和rpcbind服务开机启动，然后才可以正常挂载
+    10.180.226.127:/nfs_data/mobapp/obu_pic /home/mobapp/obu_pic nfs hard,intr,vers=3 0 0
 
-`10.180.226.127:/nfs_data/mobapp/obu_pic /home/mobapp/obu_pic nfs hard,intr,vers=3 0 0`
+    mount -t nfs -o hard,intr,vers=3 10.180.226.128:/nfs_data/fin/essm /home/essm/essmImg/cardHandle
+```
 
-`mount -t nfs -o hard,intr,vers=3 10.180.226.128:/nfs_data/fin/essm /home/essm/essmImg/cardHandle`
+
 
